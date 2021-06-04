@@ -3,21 +3,15 @@ const Celebrity = require("../models/Celebrity.model");
 // const Movie = require("../models/movie.model");
 const mongoose = require("mongoose");
 
-const celebrities = [
+const Goals = [
   {
-    name: "Robert Downey Jr",
-    occupation: "actor",
-    catchphrase: "Look at me, I'm Ironman",
+    name: "goalOne",
   },
   {
-    name: "Celeb2",
-    occupation: "actor",
-    catchphrase: "I'm not Ironman",
+    name: "goalTwo",
   },
   {
-    name: "Celeb3",
-    occupation: "singer",
-    catchphrase: "Shalalalalala",
+    name: "goalThree",
   },
 ];
 
