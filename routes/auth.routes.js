@@ -130,7 +130,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
     if (err) {
       return res.status(500).json({ errorMessage: err.message });
     }
-    res.redirect({ user: null });
+    res.json({ user: null });
   });
 });
 
