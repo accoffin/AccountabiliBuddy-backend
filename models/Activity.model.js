@@ -1,12 +1,13 @@
 const { Schema, model } = require("mongoose");
 
-const goalSetSchema = new Schema({
+const activitySchema = new Schema({
   name: String,
   startDate: Date,
   endDate: Date,
-  activities: {
+  category: String,
+  goals: {
     type: Schema.Types.ObjectId,
-    ref: "Activities",
+    ref: "GoalSet",
   },
   availability: {
     type: Schema.Types.ObjectId,
@@ -18,6 +19,6 @@ const goalSetSchema = new Schema({
   },
 });
 
-const GoalSet = model("GoalSet", goalSetSchema);
+const Activity = model("Activity", activitySchema);
 
-module.exports = GoalSet;
+module.exports = Activity;
