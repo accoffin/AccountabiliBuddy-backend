@@ -4,6 +4,6 @@ const goalSetSchema = new Schema({
   name: String,
 });
 
-const GoalSet = model("GoalSet", userSchema);
+const GoalSet = model("GoalSet", goalSetSchema);
 
 module.exports = GoalSet;
