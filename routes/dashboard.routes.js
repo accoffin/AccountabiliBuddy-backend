@@ -4,8 +4,13 @@ const router = require("express").Router();
 
 /* GET home page */
 router.get("/", async (req, res, next) => {
-  const testString = "this is the dashboard route"
-  res.status(200).json({ landing: testString });
+  const testString = "this is the dashboard route";
+  res
+    .status(200)
+    .json({ landing: testString })
+    .catch((error) => {
+      console.log(error, "Promise error");
+    });
 });
 
 // router.get("/:id", async (req, res, next) => {

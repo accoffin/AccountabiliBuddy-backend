@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const goalSetSchema = new Schema({
+const goalSchema = new Schema({
   name: String,
   startDate: Date,
   endDate: Date,
@@ -16,8 +16,12 @@ const goalSetSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Achievements",
   },
+  users: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
-const GoalSet = model("GoalSet", goalSetSchema);
+const Goal = model("Goal", goalSchema);
 
-module.exports = GoalSet;
+module.exports = Goal;
