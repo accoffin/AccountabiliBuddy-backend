@@ -5,20 +5,16 @@ const goalSchema = new Schema({
   startDate: Date,
   endDate: Date,
   activities: {
-    type: Schema.Types.ObjectId,
-    ref: "Activities",
+    type: Array,
   },
   availability: {
-    type: Schema.Types.ObjectId,
-    ref: "Availability",
+    type: Array,
   },
   achievements: {
-    type: Schema.Types.ObjectId,
-    ref: "Achievements",
+    type: Array,
   },
-  users: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+  user: {
+    type: Array,
   },
 });
 
