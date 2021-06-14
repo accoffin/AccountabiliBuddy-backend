@@ -55,4 +55,24 @@ router.post("/completed", async (req, res, next) => {
   res.status(200).json({ updatedGoal: updatedGoal });
 });
 
+router.post("/remove", async (req, res, next) => {
+  const { goalId } = req.body;
+  const goalsFromUser = await User.findByIdAndUpdate(
+    req.session.user._id,
+    { $pull: { goals: goalId } },
+    {
+      new: true,
+    }
+  ).populate([
+    {
+      path: "goals",
+      populate: {
+        path: "goals",
+        model: "Goal",
+      },
+    },
+  ]);
+  res.status(200).json({ goals: goalsFromUser.goals });
+});
+
 module.exports = router;
