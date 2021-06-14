@@ -5,14 +5,18 @@ const availabilitySchema = new Schema({
   category: String,
   startDate: Date,
   endDate: Date,
-  activities: {
-    type: Schema.Types.ObjectId,
-    ref: "Activities",
-  },
-  goals: {
-    type: Schema.Types.ObjectId,
-    ref: "GoalSet",
-  },
+  activities: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Activities",
+    },
+  ],
+  goals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Goal",
+    },
+  ],
 });
 
 const Availability = model("Availability", availabilitySchema);

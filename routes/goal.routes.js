@@ -1,24 +1,38 @@
 const router = require("express").Router();
 // const { response } = require("express");
 const Goals = require("../models/Goal.model");
+const User = require("../models/User.model");
 
 router.get("/", async (req, res, next) => {
-  const allGoals = await Goals.find({});
-  res.status(200).json({ allGoals });
+  const userId = req.session.user._id;
+  const userData = await User.findById(userId).populate([
+    {
+      path: "goals",
+      populate: {
+        path: "goals",
+        model: "Goal",
+      },
+    },
+  ]);
+  res.status(200).json({ goals: userData.goals });
 });
 
 router.get("/:goalId", async (req, res, next) => {
-  console.log("params", req.params.goalId);
   const { goalId } = req.params;
   const goalDetails = await Goals.findById({ goalId });
   res.status(200).json({ goalDetails });
 });
 
 router.post("/new", async (req, res, next) => {
-  console.log("this is form from backend", req.body);
   const newGoal = await Goals.create(req.body);
-  console.log("this is new goal results", newGoal);
-  res.status(200).json({ newGoal });
+  const pushToUser = await User.findByIdAndUpdate(
+    req.body.user,
+    {
+      $push: { goals: newGoal._id },
+    },
+    { new: true }
+  );
+  res.status(200).json({ goals: pushToUser.goals });
 });
 
 module.exports = router;

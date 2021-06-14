@@ -7,10 +7,12 @@ const userSchema = new Schema({
     unique: true,
   },
   password: String,
-  goals: {
-    type: Schema.Types.ObjectId,
-    ref: "GoalSet",
-  },
+  goals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Goal",
+    },
+  ],
 });
 
 const User = model("User", userSchema);

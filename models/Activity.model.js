@@ -5,18 +5,24 @@ const activitySchema = new Schema({
   startDate: Date,
   endDate: Date,
   category: String,
-  goals: {
-    type: Schema.Types.ObjectId,
-    ref: "GoalSet",
-  },
-  availability: {
-    type: Schema.Types.ObjectId,
-    ref: "Availability",
-  },
-  achievements: {
-    type: Schema.Types.ObjectId,
-    ref: "Achievements",
-  },
+  goals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Goal",
+    },
+  ],
+  availability: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Availability",
+    },
+  ],
+  achievements: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Achievements",
+    },
+  ],
 });
 
 const Activity = model("Activity", activitySchema);
