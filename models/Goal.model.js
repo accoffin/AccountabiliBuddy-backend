@@ -16,6 +16,10 @@ const goalSchema = new Schema({
   user: {
     type: Array,
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Goal = model("Goal", goalSchema);

@@ -43,4 +43,16 @@ router.post("/update", async (req, res, next) => {
   res.status(200).json({ updatedGoal: updatedGoal });
 });
 
+router.post("/completed", async (req, res, next) => {
+  const { goalId } = req.body;
+  const updatedGoal = await Goals.findByIdAndUpdate(
+    goalId,
+    { $set: { completed: true } },
+    {
+      new: true,
+    }
+  );
+  res.status(200).json({ updatedGoal: updatedGoal });
+});
+
 module.exports = router;
