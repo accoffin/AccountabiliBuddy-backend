@@ -13,6 +13,11 @@ const userSchema = new Schema({
       ref: "Goal",
     },
   ],
+  activities: [
+    {
+      type: Object,
+    },
+  ],
 });
 
 const User = model("User", userSchema);
