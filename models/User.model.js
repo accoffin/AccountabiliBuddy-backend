@@ -18,6 +18,11 @@ const userSchema = new Schema({
       type: Object,
     },
   ],
+  created_activities: [
+    {
+      type: Object,
+    },
+  ],
 });
 
 const User = model("User", userSchema);

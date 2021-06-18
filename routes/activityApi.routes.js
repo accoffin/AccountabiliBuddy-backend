@@ -5,7 +5,6 @@ const User = require("../models/User.model");
 
 router.get("/api", async (req, res, next) => {
   const { city, state, query } = req.query;
-
   const resultsFromAPI = await axios.get(
     `http://api.amp.active.com/v2/search/?radius=&city=${city}&state=${state}&zip=&country=&query=${query}&current_page=&per_page=100&sort=distance&exclude_children=true&api_key=${process.env.ACTIVE_APIKEY}`
   );
