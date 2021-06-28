@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const goalSchema = new Schema({
-  name: String,
-  startDate: Date,
-  endDate: Date,
+  title: String,
+  start: Date,
+  end: Date,
   activities: [
     {
       type: Array,
