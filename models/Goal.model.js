@@ -24,6 +24,10 @@ const goalSchema = new Schema({
       type: Array,
     },
   ],
+  completed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Goal = model("Goal", goalSchema);

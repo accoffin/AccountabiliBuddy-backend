@@ -27,6 +27,12 @@ app.use("/dashboard", dashboardRoutes);
 const goalRoutes = require("./routes/goal.routes");
 app.use("/goals", goalRoutes);
 
+const activityRoutes = require("./routes/activityApi.routes");
+app.use("/activities", activityRoutes);
+
+const createdActivityRoutes = require("./routes/activitiesCreated.routes");
+app.use("/created-activities", createdActivityRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
