@@ -20,7 +20,8 @@ const userSchema = new Schema({
   ],
   created_activities: [
     {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: "createdActivity",
     },
   ],
 });
