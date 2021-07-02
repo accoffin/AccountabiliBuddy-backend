@@ -4,9 +4,15 @@ const goalSchema = new Schema({
   title: String,
   start: Date,
   end: Date,
-  activities: [
+  created_activities: [
     {
-      type: Array,
+      type: Schema.Types.ObjectId,
+      ref: "createdActivity",
+    },
+  ],
+  saved_activities: [
+    {
+      type: Array
     },
   ],
   availability: [

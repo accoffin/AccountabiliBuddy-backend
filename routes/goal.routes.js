@@ -8,10 +8,16 @@ router.get("/", async (req, res, next) => {
   const userData = await User.findById(userId).populate([
     {
       path: "goals",
-      populate: {
-        path: "goals",
-        model: "Goal",
-      },
+      populate: [
+        { path: "goals" },
+        {
+          path: "created_activities",
+          populate: {
+            path: "created_activities",
+            model: "Goal",
+          },
+        },
+      ],
     },
   ]);
   res.status(200).json({ goals: userData.goals });
@@ -24,6 +30,7 @@ router.get("/:goalId", async (req, res, next) => {
 });
 
 router.post("/new", async (req, res, next) => {
+  console.log("req.body", req.body);
   const newGoal = await Goals.create(req.body);
   const pushToUser = await User.findByIdAndUpdate(
     req.body.user,

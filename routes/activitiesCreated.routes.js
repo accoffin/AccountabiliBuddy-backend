@@ -3,10 +3,12 @@ const router = express.Router();
 const axios = require("axios");
 const User = require("../models/User.model");
 const CreatedActivities = require("../models/userCreatedActivity.model");
+const Goal = require("../models/Goal.model");
 
 router.get("/", async (req, res, next) => {
-  const userId = req.session.user._id;
-  const userData = await User.findById(userId).populate([
+  const { goalId } = req.body;
+  console.log("goalId", req.body)
+  const goalData = await Goal.findById(goalId).populate([
     {
       path: "created_activities",
       populate: {
@@ -15,13 +17,17 @@ router.get("/", async (req, res, next) => {
       },
     },
   ]);
-  res.status(200).json({ createdActivities: userData.created_activities });
+  res.status(200).json({ createdActivities: goalData.created_activities });
 });
 
 router.post("/create", async (req, res, next) => {
+  // console.log("req.body", req.body);
   const newActivity = await CreatedActivities.create(req.body);
-  const pushToUser = await User.findByIdAndUpdate(
-    req.body.user,
+  const pushToUser = await User.findByIdAndUpdate(req.body.user, {
+    $push: { created_activities: newActivity._id },
+  });
+  const pushToGoal = await Goal.findByIdAndUpdate(
+    req.body.goalId,
     {
       $push: { created_activities: newActivity._id },
     },
@@ -35,7 +41,8 @@ router.post("/create", async (req, res, next) => {
       },
     },
   ]);
-  res.status(200).json({ createdActivities: pushToUser.created_activities });
+  console.log("createdActivities", pushToGoal);
+  res.status(200).json({ createdActivities: pushToGoal.created_activities });
 });
 
 router.post("/remove", async (req, res, next) => {
