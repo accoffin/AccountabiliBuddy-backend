@@ -3,6 +3,20 @@ const router = require("express").Router();
 const Goals = require("../models/Goal.model");
 const User = require("../models/User.model");
 
+router.get("/get", async (req, res, next) => {
+  const userId = req.session.user._id;
+  const userData = await User.findById(userId).populate([
+    {
+      path: "goals",
+      populate: {
+        path: "goals",
+        model: "Goal",
+      },
+    },
+  ]);
+  res.status(200).json({ goals: userData.goals });
+});
+
 router.get("/", async (req, res, next) => {
   const userId = req.session.user._id;
   const userData = await User.findById(userId).populate([
