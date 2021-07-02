@@ -5,9 +5,23 @@ const User = require("../models/User.model");
 const CreatedActivities = require("../models/userCreatedActivity.model");
 const Goal = require("../models/Goal.model");
 
+router.get("/user", async (req, res, next) => {
+  const userId = req.session.user._id;
+  const userData = await User.findById(userId).populate([
+    {
+      path: "created_activities",
+      populate: {
+        path: "created_activities",
+        model: "createdActivity",
+      },
+    },
+  ]);
+  res.status(200).json({ createdActivities: userData.created_activities });
+});
+
 router.get("/", async (req, res, next) => {
   const { goalId } = req.body;
-  console.log("goalId", req.body)
+  console.log("goalId", req.body);
   const goalData = await Goal.findById(goalId).populate([
     {
       path: "created_activities",
